@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using VetManagement.Core.Model;
 using BLL;
+using System.IO;
 
 namespace MVC.Controllers
 {
@@ -50,11 +51,23 @@ namespace MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ClientId,Gender")] Patient patient)
+        public ActionResult Create([Bind(Include = "Id,Name,ClientId,Gender,ImagePath")] Patient patient, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && patient.Name != null && patient.Gender != 0)
             {
                 var patientBll = new PatientBLL();
+
+                if(file != null && file.ContentLength > 0)
+                {
+                    string filename = Path.GetFileName(file.FileName);
+                    string imgpath = Path.Combine(Server.MapPath("~/Content/PatientImages/"), filename);
+                    file.SaveAs(imgpath);
+                    patient.ImgPath = "~/Content/PatientImages/" + file.FileName;
+                } else
+                {
+                    patient.ImgPath = "~/Content/PatientImages/default.jpg";
+                }
+                
                 patientBll.Insert(patient);
                 return RedirectToAction("Index");
             }
@@ -86,11 +99,18 @@ namespace MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ClientId,Gender")] Patient patient)
+        public ActionResult Edit([Bind(Include = "Id,Name,ClientId,Gender,ImagePath")] Patient patient, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
                 var patientBll = new PatientBLL();
+                if (file != null && file.ContentLength > 0)
+                {
+                    string filename = Path.GetFileName(file.FileName);
+                    string imgpath = Path.Combine(Server.MapPath("~/Content/PatientImages/"), filename);
+                    file.SaveAs(imgpath);
+                    patient.ImgPath = "~/Content/PatientImages/" + file.FileName;
+                }
                 patientBll.Update(patient);
                 return RedirectToAction("Index");
             }

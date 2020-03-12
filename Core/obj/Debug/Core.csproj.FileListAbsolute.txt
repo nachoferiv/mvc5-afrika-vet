@@ -14,4 +14,3 @@ C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Core\bin\Debug\Core.dll
 C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Core\bin\Debug\Core.pdb
 C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Core\obj\Debug\Core.dll
 C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Core\obj\Debug\Core.pdb
-C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Core\obj\Debug\Core.csprojAssemblyReference.cache

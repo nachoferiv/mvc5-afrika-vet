@@ -44,6 +44,7 @@ namespace VetProject.Data
                 patient.Gender = updated.Gender;
                 patient.Owner = updated.Owner;
                 patient.ClientId = updated.ClientId;
+                patient.ImgPath = updated.ImgPath;
             }
             context.SaveChanges();
         }

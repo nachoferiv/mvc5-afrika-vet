@@ -52,6 +52,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -275,10 +278,7 @@
     <Content Include="Views\Clients\Details.cshtml" />
     <Content Include="Views\Clients\Edit.cshtml" />
     <Content Include="Views\Clients\Index.cshtml" />
-    <Content Include="Views\Appointments\Create.cshtml" />
-    <Content Include="Views\Appointments\Delete.cshtml" />
     <Content Include="Views\Appointments\Details.cshtml" />
-    <Content Include="Views\Appointments\Edit.cshtml" />
     <Content Include="Views\Appointments\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
@@ -300,7 +300,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
-    <Content Include="Views\Shared\newLayout.cshtml" />
     <Content Include="Views\Appointments\PartialEdit.cshtml" />
     <Content Include="Views\Appointments\PartialCreate.cshtml" />
     <None Include="Web.Debug.config">
@@ -313,6 +312,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
+    <Folder Include="Content\PatientImages\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

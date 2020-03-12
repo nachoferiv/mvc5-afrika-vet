@@ -16,6 +16,9 @@
     <div class="form-wrapper">
         <div class="form">
             <div class="input-fields">
+                <div>
+                    <img id="patient-img" src="@Url.Content(Model.ImgPath)" alt="Patient Image" />
+                </div>
                 <label>@Html.DisplayNameFor(model => model.Owner.FullName)</label>
                 <input class="form-control" type="text" name="name" value="@Html.DisplayFor(model => model.Owner.FullName)" readonly />
 

@@ -15,6 +15,7 @@ namespace VetManagement.Core.Model
         public int ClientId { get; set; }
         public Client Owner { get; set; }
         public Gender Gender { get; set; }
+        public string ImgPath { get; set; }
     }
     public partial class Patient
     {
@@ -29,6 +30,8 @@ namespace VetManagement.Core.Model
             public int ClientId { get; set; }
             [Required]
             public Gender Gender { get; set; }
+            [StringLength(int.MaxValue)]
+            public string ImgPath { get; set; }
         }
     }
 }

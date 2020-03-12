@@ -66,6 +66,10 @@
     <Compile Include="Migrations\202003051726581_updateAppointmentFields.designer.cs">
       <DependentUpon>202003051726581_updateAppointmentFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003121758255_add-patient-photo.cs" />
+    <Compile Include="Migrations\202003121758255_add-patient-photo.designer.cs">
+      <DependentUpon>202003121758255_add-patient-photo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PatientData.cs" />
     <Compile Include="RoomData.cs" />
@@ -91,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003051726581_updateAppointmentFields.resx">
       <DependentUpon>202003051726581_updateAppointmentFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003121758255_add-patient-photo.resx">
+      <DependentUpon>202003121758255_add-patient-photo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

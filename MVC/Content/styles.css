@@ -310,3 +310,19 @@ option {
     background: #1b9bff;
     transition: .5s;
 }
+#patient-img {
+    width: 150px;    
+    margin: 10px auto;
+}
+
+#input-file {
+    border-bottom: none
+}
+.control-label {
+    width: 100%;
+    display: inline-block;
+}
+.field-validation-error {
+    color: red;
+    margin-top: -10px;
+}

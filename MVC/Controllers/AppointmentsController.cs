@@ -8,11 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using VetManagement.Core.Model;
 using BLL;
+using log4net;
 
 namespace MVC.Controllers
 {
     public class AppointmentsController : Controller
     {
+        private static readonly ILog logger = LogManager.GetLogger(typeof(AppointmentsController));
+
         AppointmentBLL appBLL = new AppointmentBLL();
         DoctorBLL docBLL = new DoctorBLL();
         PatientBLL patientBLL = new PatientBLL();
@@ -20,7 +23,7 @@ namespace MVC.Controllers
         // GET: Appointments
         public ActionResult Index()
         {
-            
+            logger.Debug("Index Method of Appointments Controller!");
             return View();
         }
         [HttpGet]

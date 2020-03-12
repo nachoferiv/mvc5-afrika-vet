@@ -55,7 +55,9 @@ namespace VetProject.Data
             var appointments = context.Appointments.Include(p => p.Doctor)
                                                     .Include(p => p.Room)
                                                     .Include(p => p.Patient)
-                                                    .Where(i => i.StartDate == app.StartDate);
+                                                    .Where(i => i.RoomId == app.RoomId)
+                                                    .Where(i => i.StartDate == app.StartDate)
+                                                    .Where(i => i.Id != app.Id);
             string error = null;
 
             if (app.StartDate == app.EndDate)
@@ -70,7 +72,7 @@ namespace VetProject.Data
             }
 
             var hours = app.EndDate - app.StartDate;
-            if (hours.Hours > 6)
+            if (hours.Hours > 6 || hours.Days >= 1)
             {
                 error = "The appointments duration can not be grather than 6 hours.";
                 return error;

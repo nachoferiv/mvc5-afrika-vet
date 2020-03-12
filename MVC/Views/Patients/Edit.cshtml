@@ -12,7 +12,7 @@
     <title>Edit</title>
 </head>
 <body>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Patients", FormMethod.Post, new { enctype= "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <h2>Edit Patient</h2>
@@ -21,6 +21,16 @@
             @Html.HiddenFor(model => model.Id)
             <div class="form">
                 <div class="input-fields edit">
+                    <div>
+                        <img id="patient-img" src="@Url.Content(Model.ImgPath)" alt="Patient Image" />
+                    </div>
+                    @Html.LabelFor(model => model.ImgPath, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <input type="file" name="file" class="form-control" id="input-file" />
+                </div>
+                <div class="separator"></div>
+                <div class="input-fields edit">
+                    @Html.ValidationMessageFor(model => model.ImgPath, "", new { @class = "text-danger" })
+
                     @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })

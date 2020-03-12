@@ -57,3 +57,4 @@ C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Data\obj\Debug\Data.csp
 C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Data\obj\Debug\Data.dll
 C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Data\obj\Debug\Data.pdb
 C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Data\obj\Debug\Data.Migrations.updateAppointmentFields.resources
+C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Data\obj\Debug\Data.Migrations.addpatientphoto.resources
