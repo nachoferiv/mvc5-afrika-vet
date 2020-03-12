@@ -1,0 +1,77 @@
+﻿@model IEnumerable<VetManagement.Core.Model.Doctor>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h2>Doctors</h2>
+    <span class="create-button">
+        @Html.ActionLink("Create New", "Create")
+    </span>
+    <div class="wrapper">
+        <table class="table">
+            <tr class="row header">
+                <th class="cell">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th class="cell">
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th class="cell">
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th class="cell">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th class="cell">
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th class="cell">
+                    @Html.DisplayNameFor(model => model.EntryDate)
+                </th>
+                <th class="cell">
+                    Manage
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr class="row">
+                    <td class="cell">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="cell">
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td class="cell">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="cell">
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td class="cell">
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td class="cell">
+                        @Html.DisplayFor(modelItem => item.EntryDate)
+                    </td>
+                    <td class="cell">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>
+</html>

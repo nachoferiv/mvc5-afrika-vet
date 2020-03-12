@@ -1,0 +1,262 @@
+﻿@model IEnumerable<VetManagement.Core.Model.Appointment>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar</title>
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--FullCalendar-->
+    <link href='~/Libs/fullcalendar-4.0.2/packages/core/main.css' rel='stylesheet' />
+    <link href='~/Libs/fullcalendar-4.0.2/packages/daygrid/main.css' rel='stylesheet' />
+    <link href='~/Libs/fullcalendar-4.0.2/packages/timegrid/main.css' rel='stylesheet' />
+    <link href='~/Libs/fullcalendar-4.0.2/packages/list/main.css' rel='stylesheet' />
+    <script src='~/Libs/fullcalendar-4.0.2/packages/core/main.js'></script>
+    <script src='~/Libs/fullcalendar-4.0.2/packages/interaction/main.js'></script>
+    <script src='~/Libs/fullcalendar-4.0.2/packages/daygrid/main.js'></script>
+    <script src='~/Libs/fullcalendar-4.0.2/packages/timegrid/main.js'></script>
+    <script src='~/Libs/fullcalendar-4.0.2/packages/list/main.js'></script>
+
+    <!--Alertify-->
+    <link href="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js"></script>
+
+
+    <link href="~/Content/styles.css" rel="stylesheet" />
+    <!--JQuery-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <!--Bootstrap-->
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <!--DateTimePicker-->
+    <link href="~/Libs/datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet" />
+    <script src="~/Libs/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+</head>
+<body>
+    <nav class="main-nav">
+        <input type="checkbox" id="check" />
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">
+            Afrika
+        </label>
+        <ul>
+            <li><a href="/Home/Index">Home</a></li>
+            <li><a href="~/Appointments/Index">Appointments</a></li>
+            <li><a href="~/Clients/Index">Clients</a></li>
+            <li><a href="~/Patients/Index">Patients</a></li>
+            <li><a href="~/Doctors/Index">Doctors</a></li>
+            <li><a href="~/Rooms/Index">Rooms</a></li>
+        </ul>
+    </nav>
+    <section class="main-section no-resize">
+        <div class="main-div">
+            <div class="calendar" id="calendar"></div>
+        </div>
+    </section>
+    <div id="modal-view" class="modal fade custom-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title"><h3>Appointment Details</h3></div>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                    }
+                    <span id="appointment-id" hidden></span>
+                    <p><strong>Patient: </strong> <span id="appointment-patient"></span>  <a class="create-button" id="link-patient">Patient Details</a></p>
+                    <p><strong>Doctor: </strong> <span id="appointment-doctor"></span> <a class="create-button" id="link-doctor">Doctor Details</a></p>
+                    <p><strong>Room: </strong> <span id="appointment-room"></span> <a class="create-button" id="link-room">Room Details</a></p>
+                    <p><strong>Date:</strong> <span id="appointment-date"></span></p>
+                    <p><strong>From:</strong> <span id="appointment-from"></span></p>
+                    <p><strong>To:</strong> <span id="appointment-to"></span></p>
+                    <h4><strong>Description</strong></h4>
+                    <p id="appointment-desc"></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="edit" type="button" class="btn btn-primary">Edit</button>
+                    <button id="delete" type="button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-edit" class="modal hide fade in custom-modal" role="dialog">
+        @{
+            TempData["error"] = ViewBag.error;
+        }
+        <span id="edit-message-id" hidden>@ViewBag.errorId</span>
+    </div>
+    <div id="modal-create" class="modal hide fade in custom-modal" role="dialog">
+        <span id="create-message-id" hidden>@ViewBag.create</span>
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        function parseDate(date) {
+            let copy = date;
+            let hour = parseInt(copy.slice(10, 12));
+            let parsed = moment(new Date(parseInt(date.substr(6)))).format('YYYY-MM-DD hh:mm A')
+
+            if (parsed.indexOf('PM') !== -1 && hour > 12) {
+                let hours = parsed.slice(10, 13)
+                hours = parseInt(hours) + 12;
+                parsed = parsed.slice(0, 11) + hours.toString() + parsed.slice(13, 16)
+                return parsed
+            } else {
+                return parsed.slice(0, parsed.length - 3)
+            }
+        }
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Appointments/GetEvents',
+                success: function (data) {
+                    var events = [];
+                    $.each(data, function (i, v) {
+                        ;
+                        events.push({
+                            id: v.Id,
+                            patient: v.Patient,
+                            room: v.Room,
+                            doctor: v.Doctor,
+                            start: parseDate(v.StartDate),
+                            end: parseDate(v.EndDate),
+                            description: v.Description,
+                            title: v.Patient.Name + ' - ' + v.Description,
+                        });
+                    })
+                    console.log(events);
+                    GenerateCalendar(events);
+                },
+                error: function (error) {
+                    alert(failed);
+                }
+            })
+
+            function GenerateCalendar(events) {
+
+                var calendarEl = document.getElementById('calendar');
+
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    customButtons: {
+                        schedule: {
+                            text: 'Schedule App.',
+                            click: function () {
+                                $("#modal-create").load("/Appointments/GetView",
+                                    { id: '', viewName: "PartialCreate" });
+                                $("#modal-create").modal("show");
+                            }
+                        }
+                    },
+                    plugins: ['interaction', 'dayGrid', 'timeGrid'],
+                    timeZone: 'America/New_York',
+                    header: {
+                        left: 'prev,schedule,next',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    },
+                    defaultDate: new Date(),
+                    timeFormat: 'h(:mm)t',
+                    navLinks: true, // can click day/week names to navigate views
+                    businessHours: true, // display business hours
+                    eventLimit: true, // allow "more" link when too many events
+                    events: events,
+                    eventClick: function (calEvent, jsEvent, view) {
+                        console.log('calEvent', calEvent)
+
+                        $("#appointment-id").text(calEvent.event.id);
+
+                        $("#modal-view #eventTitle").text(calEvent.title);
+
+                        $("#appointment-patient").html(calEvent.event.extendedProps.patient.Name);
+                        $("#link-patient").attr("href", "../Patients/Details/" + calEvent.event.extendedProps.patient.Id);
+
+                        $("#appointment-doctor").html(calEvent.event.extendedProps.doctor.LastName + ', ' + calEvent.event.extendedProps.doctor.Name);
+                        $("#link-doctor").attr("href", "../Doctors/Details/" + calEvent.event.extendedProps.doctor.Id);
+
+                        $("#appointment-room").html(calEvent.event.extendedProps.room.Name);
+                        $("#link-room").attr("href", "../Rooms/Details/" + calEvent.event.extendedProps.room.Id);
+
+                        $("#appointment-date").html(moment(calEvent.event.start).format('DD-MM-YYYY'))
+                        $('#appointment-from').html(moment(calEvent.event.start).format('HH:mm') + " hs.");
+                        $('#appointment-to').html(moment(calEvent.event.end).format('HH:mm') + " hs.");
+                        $('#appointment-desc').html(calEvent.event.extendedProps.description);
+
+                        $('#modal-view').modal('show');
+                    }
+                });
+
+                calendar.render();
+            }
+
+            $("#edit").click(function () {
+                var appointmentId = $("#appointment-id").text();
+
+                $("#modal-edit").load("/Appointments/GetView",
+                    { id: appointmentId, viewName: "PartialEdit" })
+                $("#modal-view").modal("hide");
+                $("#modal-edit").modal("show");
+            })
+
+             $("#delete").click(function () {
+                var appointmentId = $("#appointment-id").text();
+
+                 alertify.confirm("You are deleting this Appointment. Are you sure?",
+                     function () {
+                         var form = $('#__AjaxAntiForgeryForm');
+                         var token = $('input[name="__RequestVerificationToken"]', form).val();
+                          $.ajax({
+                              type: 'POST',
+                              data: { 
+                                    __RequestVerificationToken: token
+                                },
+                              url: '/Appointments/Delete/' + appointmentId,
+                              success: function () {
+                                  alertify.success('Deleted Successfully');
+                                  window.setTimeout(() => {
+                                      window.location = "@Url.Action("Index","Appointments")"; 
+                                  }
+                                  ,2500) 
+                              },
+                              error: function (error) {
+                                  alertify.error(error)
+                              }
+                            })
+                      },
+                      function() {
+                        alertify.error('Cancel');
+                      }
+                );
+            })
+
+            if ($("#edit-message-id").text().length > 0) { 
+                var appointmentId = $("#edit-message-id").text();
+
+                $("#modal-edit").load("/Appointments/GetView",
+                    { id: appointmentId, viewName: "PartialEdit" })
+                $("#modal-edit").modal("show");
+            }
+
+            if ($("#create-message-id").text().length > 0) { 
+                var appointmentId = $("#create-message-id").text();
+
+                $("#modal-create").load("/Appointments/GetView",
+                    { id: '', viewName: "PartialCreate" })
+                $("#modal-create").modal("show");
+            }
+        })
+    </script>
+</body>
+</html>

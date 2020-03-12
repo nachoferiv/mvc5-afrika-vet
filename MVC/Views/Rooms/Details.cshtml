@@ -1,0 +1,37 @@
+﻿@model VetManagement.Core.Model.Room
+
+@{
+   Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <h2>Room's Details</h2>
+    <div class="form-wrapper">
+        <div class="form">
+            <div class="input-fields">
+                <label>@Html.DisplayNameFor(model => model.Name)</label>
+                <input class="form-control" type="text" name="name" value="@Html.DisplayFor(model => model.Name)" readonly />
+
+                <label>@Html.DisplayNameFor(model => model.Location)</label>
+                <input class="form-control" type="text" name="location" value="@Html.DisplayFor(model => model.Location)" readonly />
+            </div>
+        </div>
+        <div class="create-button">
+            <i class="far fa-edit"></i>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        </div>
+
+        <div class="create-button">
+            <i class="fas fa-arrow-left"></i>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</body>
+</html>

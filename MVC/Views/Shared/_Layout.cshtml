@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Afrika Vet</title>
+    <link href="~/Content/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="main-nav">
+        <input type="checkbox" id="check" />
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">
+            Afrika
+        </label>
+        <ul>
+            <li><a href="/Home/Index">Home</a></li>
+            <li><a href="~/Appointments/Index">Appointments</a></li>
+            <li><a href="~/Clients/Index">Clients</a></li>
+            <li><a href="~/Patients/Index">Patients</a></li>
+            <li><a href="~/Doctors/Index">Doctors</a></li>
+            <li><a href="~/Rooms/Index">Rooms</a></li>
+        </ul>
+    </nav>
+    <section class="main-section">
+        <div class="main-div">
+            @RenderBody()
+        </div>
+    </section>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

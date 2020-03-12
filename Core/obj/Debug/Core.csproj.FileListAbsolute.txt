@@ -1,0 +1,17 @@
+C:\Users\ignacfer\source\repos\IgnacioFernandezRivas\Core\bin\Debug\Core.dll
+C:\Users\ignacfer\source\repos\IgnacioFernandezRivas\Core\bin\Debug\Core.pdb
+C:\Users\ignacfer\source\repos\IgnacioFernandezRivas\Core\obj\Debug\Core.csprojAssemblyReference.cache
+C:\Users\ignacfer\source\repos\IgnacioFernandezRivas\Core\obj\Debug\Core.csproj.CoreCompileInputs.cache
+C:\Users\ignacfer\source\repos\IgnacioFernandezRivas\Core\obj\Debug\Core.dll
+C:\Users\ignacfer\source\repos\IgnacioFernandezRivas\Core\obj\Debug\Core.pdb
+C:\Users\ignacfer\Desktop\LPPA\Proyectos\IgnacioFernandezRivas\Core\bin\Debug\Core.dll
+C:\Users\ignacfer\Desktop\LPPA\Proyectos\IgnacioFernandezRivas\Core\bin\Debug\Core.pdb
+C:\Users\ignacfer\Desktop\LPPA\Proyectos\IgnacioFernandezRivas\Core\obj\Debug\Core.csprojAssemblyReference.cache
+C:\Users\ignacfer\Desktop\LPPA\Proyectos\IgnacioFernandezRivas\Core\obj\Debug\Core.csproj.CoreCompileInputs.cache
+C:\Users\ignacfer\Desktop\LPPA\Proyectos\IgnacioFernandezRivas\Core\obj\Debug\Core.dll
+C:\Users\ignacfer\Desktop\LPPA\Proyectos\IgnacioFernandezRivas\Core\obj\Debug\Core.pdb
+C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Core\bin\Debug\Core.dll
+C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Core\bin\Debug\Core.pdb
+C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Core\obj\Debug\Core.dll
+C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Core\obj\Debug\Core.pdb
+C:\Users\ignac\OneDrive\Escritorio\IgnacioFernandezRivas\Core\obj\Debug\Core.csprojAssemblyReference.cache

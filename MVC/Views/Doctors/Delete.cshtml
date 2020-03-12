@@ -1,0 +1,51 @@
+﻿@model VetManagement.Core.Model.Doctor
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h2>Are you sure you want to delete this Doctor?</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-wrapper">
+            <div class="form">
+                <div class="input-fields">
+                    <label>@Html.DisplayNameFor(model => model.Name)</label>
+                    <input class="form-control" type="text" name="name" value="@Html.DisplayFor(model => model.Name)" readonly />
+
+                    <label>@Html.DisplayNameFor(model => model.LastName)</label>
+                    <input class="form-control" type="text" name="lastname" value="@Html.DisplayFor(model => model.LastName)" readonly />
+
+                    <label>@Html.DisplayNameFor(model => model.Email)</label>
+                    <input class="form-control" type="text" name="email" value="@Html.DisplayTextFor(model => model.Email)" readonly />
+                </div>
+                <div class="separator"></div>
+                <div class="input-fields">
+                    <label>@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+                    <input class="form-control" type="tel" name="phone" value="@Html.DisplayFor(model => model.PhoneNumber)" readonly />
+
+                    <label>@Html.DisplayNameFor(model => model.Address)</label>
+                    <input class="form-control" type="text" name="name" value="@Html.DisplayFor(model => model.Address)" readonly />
+
+                    <label>@Html.DisplayNameFor(model => model.EntryDate)</label>
+                    <input class="form-control" type="text" name="name" value="@Html.DisplayFor(model => model.EntryDate)" readonly />
+                </div>
+            </div>
+                <input type="submit" value="Delete" class="submit-button" />
+                <div class="create-button">
+                    <i class="fas fa-arrow-left"></i>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+        </div>
+    }
+</body>
+</html>

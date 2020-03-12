@@ -1,0 +1,40 @@
+﻿@model VetManagement.Core.Model.Client
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <h2>Client's Details</h2>
+    <div class="form-wrapper">
+        <div class="form">
+            <div class="input-fields">
+                <label>@Html.DisplayNameFor(model => model.FullName)</label>
+                <input class="form-control" type="text" name="name" value="@Html.DisplayFor(model => model.FullName)" readonly />
+
+                <label>@Html.DisplayNameFor(model => model.Email)</label>
+                <input class="form-control" type="email" name="email" value="@Html.DisplayFor(model => model.Email)" readonly />
+
+                <label>@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+                <input class="form-control" type="tel" name="phone" value="@Html.DisplayFor(model => model.PhoneNumber)" readonly />
+            </div>
+        </div>
+        <div class="create-button">
+            <i class="far fa-edit"></i>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        </div>
+
+        <div class="create-button">
+            <i class="fas fa-arrow-left"></i>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</body>
+</html>

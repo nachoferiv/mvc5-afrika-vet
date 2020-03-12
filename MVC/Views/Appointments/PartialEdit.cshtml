@@ -1,0 +1,56 @@
+﻿@model VetManagement.Core.Model.Appointment
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title"><h3>Edit Appointment</h3></div>
+                <a type="button" class="close" href="@Url.Action("Index", "Appointments")"><span>&times;</span></a>
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert-danger">
+                    @ViewBag.error
+                </div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-wrapper">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+                        <div class="modal-form">
+                            <div class="input-fields edit">
+                                @Html.LabelFor(model => model.PatientId, "PatientId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.DropDownList("PatientId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+
+                                @Html.LabelFor(model => model.RoomId, "RoomId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.DropDownList("RoomId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.RoomId, "", new { @class = "text-danger" })
+
+                                @Html.LabelFor(model => model.DoctorId, "DoctorId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.DropDownList("DoctorId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DoctorId, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="separator"></div>
+                            <div class="input-fields edit">
+                                @Html.LabelFor(model => model.StartDate, "StartDate", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+
+                                @Html.LabelFor(model => model.EndDate, "EndDate", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+
+                                @Html.LabelFor(model => model.Description, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <button type="submit" formaction='@Url.Action("Edit")' class="submit-button">Save</button>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>

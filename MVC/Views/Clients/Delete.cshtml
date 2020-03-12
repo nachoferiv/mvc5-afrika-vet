@@ -1,0 +1,40 @@
+﻿@model VetManagement.Core.Model.Client
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h2>Are you sure you want to delete this Client?</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-wrapper">
+            <div class="form">
+                <div class="input-fields">
+                    <label>@Html.DisplayNameFor(model => model.FullName)</label>
+                    <input class="form-control" type="text" name="name" value="@Html.DisplayFor(model => model.FullName)" readonly />
+
+                    <label>@Html.DisplayNameFor(model => model.Email)</label>
+                    <input class="form-control" type="email" name="email" value="@Html.DisplayFor(model => model.Email)" readonly />
+
+                    <label>@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+                    <input class="form-control" type="tel" name="phone" value="@Html.DisplayFor(model => model.PhoneNumber)" readonly />
+                </div>
+            </div>
+            <input type="submit" value="Delete" class="submit-button" />
+            <div class="create-button">
+                <i class="fas fa-arrow-left"></i>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    }
+    </body>
+</html>
